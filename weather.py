@@ -15,7 +15,7 @@ def format_temperature(temp):
     """
     # To ensure the temp is in string format,this covers an  input edge case
     temp = str(temp)
-    # A variable defined using Hexacode of degree celsius 
+    # A variable defined using unicode of degree celsius 
     # Reference :https://www.google.com/search?q=how+to+define+temperature+degree+%3Dcelscius+symbols+in+python&rlz=1C5CHFA_enAU856AU856&oq=how+to+define+temperature+degree+%3Dcelscius+symbols+in+python&gs_lcrp=EgZjaHJvbWUyBggAEEUYOdIBCTIwMjEyajBqOagCALACAA&sourceid=chrome&ie=UTF-8#ip=1&kpvalbx=_qQM-ZbfCFfidseMPxM6RsQs_36
     DEGREE_SYBMOL= f'\u00b0C' 
     return f"{temp}{DEGREE_SYBMOL}"
