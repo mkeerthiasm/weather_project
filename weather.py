@@ -58,7 +58,21 @@ def convert_f_to_c(temp_in_farenheit):
     Returns:
         A float representing a temperature in degrees celcius, rounded to 1dp.
     """
-    pass
+
+    # refer to testcases for a temp_in_farenheit input and expected output
+    # temp_in_f = 90
+    # expected_result = 32.2
+    
+    # understand formula to convert given fahrenheit to celsius
+    # Reference: https://www.calculatorsoup.com/calculators/conversions/fahrenheit-to-celsius.php
+
+    # double casting of input string to float to address edge test cases
+    temp_in_farenheit = float(str(temp_in_farenheit))
+
+    celsius = (temp_in_farenheit - 32) / (9/5)
+    temp_in_celsius = round(celsius,1)
+
+    return temp_in_celsius
 
 
 def calculate_mean(weather_data):
