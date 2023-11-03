@@ -20,9 +20,6 @@ def format_temperature(temp):
     DEGREE_SYBMOL= f'\u00b0C' 
     return f"{temp}{DEGREE_SYBMOL}"
 
-
-
-
 def convert_date(iso_string):
     """Converts and ISO formatted date into a human readable format.
 
@@ -31,7 +28,26 @@ def convert_date(iso_string):
     Returns:
         A date formatted like: Weekday Date Month Year e.g. Tuesday 06 July 2021
     """
-    pass
+
+    # refer to testcases for an iso_string input and expected output
+    # date = "2021-07-05T07:00:00+08:00"
+    # expected_result = "Monday 05 July 2021"
+    
+    import datetime
+
+    # slice the iso_string for date only
+    sliced_iso_string = iso_string[:10]
+
+    # converting iso_string to a date object
+    # Reference : https://note.nkmk.me/en/python-datetime-isoformat-fromisoformat/#convert-an-isoformat-string-to-a-date-object
+    sliced_iso_string_dateobject = datetime.date.fromisoformat(sliced_iso_string)
+
+    # formatting the dateobject to a human readable format
+    # Reference: https://strftime.org/
+    iso_string_2_human_readable_format = sliced_iso_string_dateobject.strftime('%A %d %B %Y')
+    
+    return iso_string_2_human_readable_format
+    
 
 
 def convert_f_to_c(temp_in_farenheit):
