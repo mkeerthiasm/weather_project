@@ -20,6 +20,7 @@ def format_temperature(temp):
     DEGREE_SYBMOL= f'\u00b0C' 
     return f"{temp}{DEGREE_SYBMOL}"
 
+
 def convert_date(iso_string):
     """Converts and ISO formatted date into a human readable format.
 
@@ -49,7 +50,6 @@ def convert_date(iso_string):
     return iso_string_2_human_readable_format
     
 
-
 def convert_f_to_c(temp_in_farenheit):
     """Converts an temperature from farenheit to celcius.
 
@@ -73,7 +73,6 @@ def convert_f_to_c(temp_in_farenheit):
     temp_in_celsius = round(celsius,1)
 
     return temp_in_celsius
-
 
 
 def calculate_mean(weather_data):
@@ -137,7 +136,6 @@ def calculate_mean(weather_data):
         return cal_mean(string_2_number(weather_data)) # return mean
 
 
-
 def load_data_from_csv(csv_file):
     """Reads a csv file and stores the data in a list.
 
@@ -146,7 +144,21 @@ def load_data_from_csv(csv_file):
     Returns:
         A list of lists, where each sublist is a (non-empty) line in the csv file.
     """
-    pass
+
+    # CSV File Reading and Writing
+    # Reference : https://docs.python.org/3/library/csv.html
+    list_ = []
+    with open(csv_file, newline='') as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            list_.append([row['date'],int(row['min']),int(row['max'])])
+            # Initializing list
+            test_list = list_
+            # Remove empty List from List
+            # Reference : https://www.geeksforgeeks.org/python-remove-empty-list-from-list/
+            # using list comprehension
+            res = [ele for ele in test_list if ele != []]
+    return res
 
 
 def find_min(weather_data):

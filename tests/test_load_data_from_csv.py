@@ -1,6 +1,6 @@
 import unittest
 import weather
-
+import csv
 
 class LoadCSVTests(unittest.TestCase):
 
