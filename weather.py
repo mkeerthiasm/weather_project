@@ -75,6 +75,7 @@ def convert_f_to_c(temp_in_farenheit):
     return temp_in_celsius
 
 
+
 def calculate_mean(weather_data):
     """Calculates the mean value from a list of numbers.
 
@@ -83,7 +84,58 @@ def calculate_mean(weather_data):
     Returns:
         A float representing the mean value.
     """
-    pass
+
+    # Helper functions:
+    def is_positive(n):
+        """validates if a given number is positive or negative.
+
+        Args:
+            n: a number.
+        Returns:
+            A boolean value ex: positive integer : True, Negative integer : False.
+        """
+        # if the number is positive
+        if n >= 0:
+            print(True) 
+        # if the number is negative
+        else:
+            print(False)
+
+    def cal_mean(list):
+        """Calculates the mean value from a list of numbers.
+
+        Args:
+            list: a list of numbers.
+        Returns:
+            A float representing the mean value.
+        """
+        return sum(list)/len(list) # Mean = add up all the given values, then divide by how many values there are.
+    
+    def string_2_number(string_list):
+        """converts a string number to a numbers dtype.
+
+        Args:
+            string_list: a list of string numbers.
+        Returns:
+            A list of numbers.
+        """
+        empty_list = []
+        for i in string_list:
+            empty_list.append(int(i))
+        return empty_list
+    
+    # understanding the input datatype using isinstance method:
+    # Reference: https://www.w3schools.com/python/ref_func_isinstance.asp
+
+    if isinstance(weather_data[0], int): # if integer
+        return cal_mean(weather_data) # return mean 
+    
+    elif isinstance(weather_data[0], float): # if float
+        return round(float(cal_mean(weather_data)),5) # return float with 5d
+    
+    elif isinstance(weather_data[0], str): # if string
+        return cal_mean(string_2_number(weather_data)) # return mean
+
 
 
 def load_data_from_csv(csv_file):
