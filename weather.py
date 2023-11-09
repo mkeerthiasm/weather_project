@@ -83,6 +83,7 @@ def calculate_mean(weather_data):
     Returns:
         A float representing the mean value.
     """
+    # mean = sum_list/len(list)
 
     # Helper functions:
     def is_positive(n):
@@ -147,18 +148,17 @@ def load_data_from_csv(csv_file):
 
     # CSV File Reading and Writing
     # Reference : https://docs.python.org/3/library/csv.html
-    list_ = []
+    # DictReader().. This function returns a DictReader object from the underlying CSV file.
+    empty_list = []
     with open(csv_file, newline='') as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
-            list_.append([row['date'],int(row['min']),int(row['max'])])
-            # Initializing list
-            test_list = list_
+            empty_list.append([row['date'],int(row['min']),int(row['max'])])
             # Remove empty List from List
             # Reference : https://www.geeksforgeeks.org/python-remove-empty-list-from-list/
-            # using list comprehension
-            res = [ele for ele in test_list if ele != []]
-    return res
+            # using list comprehension using if condition:
+            non_empty_list = [element for element in empty_list if element != []]
+    return non_empty_list
 
 
 def find_min(weather_data):
@@ -168,10 +168,36 @@ def find_min(weather_data):
         weather_data: A list of numbers.
     Returns:
         The minium value and it's position in the list. (In case of multiple matches, return the index of the *last* example in the list.)
+
     """
-    pass
+    # By using the min, float and round methods: 
+    # print(round(float(min(weather_data)),1)), print(weather_data.index(min(weather_data)))
 
+    # By problem solving approach:
+    # Reference : https://www.geeksforgeeks.org/python-maximum-minimum-elements-position-list/
+    
+    # Casting each element in the weather to a float using list comprehension 
+    
+    # If input is empty list then retun empty tuple
+    if len(weather_data) == 0:
+        return ()
+    else:
+        weather_data = [float(item) for item in weather_data]
+    
+        # Initialise min_element in the list with the first list value
+        # Initialise min_index in the list with 0
+        min_element = weather_data[0]
+        min_index = 0
 
+        for i in range(1, len(weather_data)):
+        # iterate through the list and check if each element is less than and equal to the initialised value
+        # Incase of two same values, we need to pick the later index and value, so using  <= instead <
+        # using float and round methods to present the result in required format
+            if weather_data[i] <= min_element:
+                min_element = weather_data[i]
+                min_index = i
+        return (round(float(min_element),1), min_index)
+    
 def find_max(weather_data):
     """Calculates the maximum value in a list of numbers.
 
@@ -180,7 +206,33 @@ def find_max(weather_data):
     Returns:
         The maximum value and it's position in the list. (In case of multiple matches, return the index of the *last* example in the list.)
     """
-    pass
+    # By using the max, float and round methods: 
+    # print(round(float(max(weather_data)),1)), print(weather_data.index(min(weather_data)))
+
+    # By problem solving approach:
+    # Reference : https://www.geeksforgeeks.org/python-maximum-minimum-elements-position-list/
+    
+    # Casting each element in the weather to a float using list comprehension 
+    
+    # If input is empty list then retun empty tuple
+    if len(weather_data) == 0:
+        return ()
+    else:
+        weather_data = [float(item) for item in weather_data]
+    
+        # Initialise max_element in the list with the first list value
+        # Initialise max_index in the list with 0
+        max_element = weather_data[0]
+        max_index = 0
+
+        for i in range(1, len(weather_data)):
+        # iterate through the list and check if each element is greather than and equal to the initialised value
+        # Incase of two same values, we need to pick the later index and value, so using  >= instead >
+        # using float and round methods to present the result in required format
+            if weather_data[i] >= max_element:
+                max_element = weather_data[i]
+                max_index = i
+        return (round(float(max_element),1), max_index)
 
 
 def generate_summary(weather_data):
