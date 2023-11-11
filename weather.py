@@ -197,7 +197,8 @@ def find_min(weather_data):
                 min_element = weather_data[i]
                 min_index = i
         return (round(float(min_element),1), min_index)
-    
+
+
 def find_max(weather_data):
     """Calculates the maximum value in a list of numbers.
 
@@ -243,7 +244,111 @@ def generate_summary(weather_data):
     Returns:
         A string containing the summary information.
     """
-    pass
+
+    # Helper functions:
+    def format_temperature(temp):
+        """Takes a temperature and returns it in string format with the degrees
+            and celcius symbols.
+
+        Args:
+            temp: A string representing a temperature.
+        Returns:
+            A string contain the temperature and "degrees celcius."
+        """
+        # To ensure the temp is in string format,this covers an  input edge case
+        temp = str(temp)
+        # A variable defined using unicode of degree celsius 
+        # Reference :https://www.google.com/search?q=how+to+define+temperature+degree+%3Dcelscius+symbols+in+python&rlz=1C5CHFA_enAU856AU856&oq=how+to+define+temperature+degree+%3Dcelscius+symbols+in+python&gs_lcrp=EgZjaHJvbWUyBggAEEUYOdIBCTIwMjEyajBqOagCALACAA&sourceid=chrome&ie=UTF-8#ip=1&kpvalbx=_qQM-ZbfCFfidseMPxM6RsQs_36
+        DEGREE_SYBMOL= f'\u00b0C' 
+        return f"{temp}{DEGREE_SYBMOL}"
+    
+    def convert_date(iso_string):
+        """Converts and ISO formatted date into a human readable format.
+
+        Args:
+            iso_string: An ISO date string..
+        Returns:
+            A date formatted like: Weekday Date Month Year e.g. Tuesday 06 July 2021
+        """
+
+        # refer to testcases for an iso_string input and expected output
+        # date = "2021-07-05T07:00:00+08:00"
+        # expected_result = "Monday 05 July 2021"
+        
+        import datetime
+
+        # slice the iso_string for date only
+        sliced_iso_string = iso_string[:10]
+
+        # converting iso_string to a date object
+        # Reference : https://note.nkmk.me/en/python-datetime-isoformat-fromisoformat/#convert-an-isoformat-string-to-a-date-object
+        sliced_iso_string_dateobject = datetime.date.fromisoformat(sliced_iso_string)
+
+        # formatting the dateobject to a human readable format
+        # Reference: https://strftime.org/
+        iso_string_2_human_readable_format = sliced_iso_string_dateobject.strftime('%A %d %B %Y')
+        
+        return iso_string_2_human_readable_format
+        
+
+    def convert_f_to_c(temp_in_farenheit):
+        """Converts an temperature from farenheit to celcius.
+
+        Args:
+            temp_in_farenheit: float representing a temperature.
+        Returns:
+            A float representing a temperature in degrees celcius, rounded to 1dp.
+        """
+
+        # refer to testcases for a temp_in_farenheit input and expected output
+        # temp_in_f = 90
+        # expected_result = 32.2
+        
+        # understand formula to convert given fahrenheit to celsius
+        # Reference: https://www.calculatorsoup.com/calculators/conversions/fahrenheit-to-celsius.php
+
+        # double casting of input string to float to address edge test cases
+        temp_in_farenheit = float(str(temp_in_farenheit))
+
+        celsius = (temp_in_farenheit - 32) / (9/5)
+        temp_in_celsius = round(celsius,1)
+
+        return temp_in_celsius  
+    
+    summary = ''
+    
+    for row in weather_data:
+        formatted_date = convert_date(row[0])
+        
+        # Finding min and max temps:
+        if row[1]<row[2]:
+            Minimum_temperature = row[1]
+            Maximum_temperature = row[2]
+        else:
+            Minimum_temperature = row[2]
+            Maximum_temperature = row[1]
+        
+        # converting temps from farenheit to celcius:
+        Minimum_temperature =  convert_f_to_c(float(Minimum_temperature))
+        # formatting temp to a human readble format:
+        Minimum_temperature =  format_temperature(str(Minimum_temperature))
+
+        # converting temps from farenheit to celcius:
+        Maximum_temperature =  convert_f_to_c(float(Maximum_temperature))
+        # formatting temp to a human readble format:
+        Maximum_temperature =  format_temperature(str(Maximum_temperature))
+
+        # How to format in a f string:
+        # Reference: https://stackoverflow.com/questions/49416042/how-to-write-an-f-string-on-multiple-lines-without-introducing-unintended-whites
+        # After a lot of try and error realised a newline in f string works well for print rather return 
+        
+        part_summary = (
+            f'---- {formatted_date} ----\n'
+            f'Minimum Temperature: {Minimum_temperature}\n'
+            f'Maximum Temperature: {Maximum_temperature}\n\n'
+            )
+        summary += part_summary
+    return print(summary)
 
 
 def generate_daily_summary(weather_data):
