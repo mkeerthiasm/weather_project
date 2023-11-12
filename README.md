@@ -6,3 +6,4 @@ Screenshots capturing each successful execution of unit tests.<img width="1436" 
 <img width="1427" alt="3 CalculateMeanTests" src="https://github.com/mkeerthiasm/weather_project/assets/147217244/991299f5-828c-454e-aabb-fc0e12c039bc">
 <img width="1440" alt="2 ConvertTempTests" src="https://github.com/mkeerthiasm/weather_project/assets/147217244/a430a9c9-3f93-40b7-ac81-4b371d98dfdb">
 <img width="1424" alt="1 ConvertDateTests" src="https://github.com/mkeerthiasm/weather_project/assets/147217244/3f3eb6ee-127e-408b-843a-e2997db789ec">
+![8 GenerateDailySummaryTests](https://github.com/mkeerthiasm/weather_project/assets/147217244/688e00a6-8c9a-4f60-b396-933dbb059003)
